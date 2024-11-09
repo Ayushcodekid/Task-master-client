@@ -63,6 +63,8 @@ const Login = () => {
       return;
     }
 
+    const loadingToast = toast.loading('Logging in...');
+
     setLoading(true);
 
     const loginData = {
@@ -108,6 +110,8 @@ const Login = () => {
 
     } finally {
       setLoading(false);
+      toast.dismiss(loadingToast); // Dismiss the loading toast
+
     }
   }
 
@@ -120,6 +124,7 @@ const Login = () => {
       console.error("No Google credential received");
       return;
     }
+    const loadingToast = toast.loading('Logging in with Google...');
 
     setLoading(true);
 
@@ -133,6 +138,8 @@ const Login = () => {
       setErrors({ apiError: "Google login failed. Please try again." });
     } finally {
       setLoading(false);
+      toast.dismiss(loadingToast); // Dismiss the loading toast
+
     }
   };
 
@@ -191,9 +198,7 @@ const Login = () => {
           {/* {errors.password && <p className="error-message">{errors.password}</p>} */}
 
           <div className="login-btn-form">
-            <button type="submit" className="login-button" disabled={loading}>
-              {loading ? "Logging in..." : "Login"}
-            </button><br />
+            <button type="submit" className="login-button" disabled={loading}>Login</button><br />
           </div>
 
           <div className="register-link">
