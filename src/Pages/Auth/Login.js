@@ -58,7 +58,7 @@ const Login = () => {
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       for (let error in validationErrors) {
-        toast.error(validationErrors[error]);  // Show error via Toastify
+        toast.error(validationErrors[error]);  
       }
       return;
     }
