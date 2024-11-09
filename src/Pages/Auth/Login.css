@@ -181,7 +181,7 @@ button {
 }
 
 .login-body{
-  background: url('./background.jpg') no-repeat;
+  background-image: radial-gradient(circle 1300px at 78% 78%, #243447, #0f0f14 70%);
   width: 100%;
   height: 100vh;
   display: flex;
