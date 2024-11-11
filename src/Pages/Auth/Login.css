@@ -264,7 +264,7 @@ button {
 .login-button:hover{
   transform: scale(1.02);
   color: #fff;
-  background: linear-gradient(250deg, rgb(97, 35, 243), rgb(34, 139, 238));
+  background: linear-gradient(270deg, #0f0f14, rgb(14, 66, 117));
   border: none;
 }
 

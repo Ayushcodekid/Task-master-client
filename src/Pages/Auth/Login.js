@@ -13,7 +13,7 @@ import './Login.css';
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    usernameOrEmail: '', // Field for either username or email
+    email: '', // Field for either username or email
     password: '',
   });
 
@@ -39,8 +39,12 @@ const Login = () => {
   const validate = () => {
     const newErrors = {};
 
-    if (!formData.usernameOrEmail.trim()) {
-      newErrors.usernameOrEmail = 'Username or Email is required';
+    if (!formData.email.trim()) {
+      // newErrors.email = 'Email is required';
+      toast.error('Email is required');  // Show toast error for email validation
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      // newErrors.email = 'Please enter a valid email';
+      toast.error('Please enter a valid email');  // Show toast error for invalid email format
     }
 
     if (!formData.password) {
@@ -68,8 +72,7 @@ const Login = () => {
     setLoading(true);
 
     const loginData = {
-      username: formData.usernameOrEmail.includes('@') ? undefined : formData.usernameOrEmail,
-      email: formData.usernameOrEmail.includes('@') ? formData.usernameOrEmail : undefined,
+      email: formData.email, // Only sending email
       password: formData.password,
     };
 
@@ -174,11 +177,11 @@ const Login = () => {
           <div className="input-container-login">
             <FaUser className="icon" />
             <input
-              type="text"
-              name="usernameOrEmail"
-              placeholder="Username or Email"
+              type="email" // Updated to email type
+              name="email"
+              placeholder="Email"
               onChange={handleChange}
-              value={formData.usernameOrEmail}
+              value={formData.email}
               className="login-input"
             />
           </div>
