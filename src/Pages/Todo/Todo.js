@@ -9,14 +9,13 @@ import {
   TextField,
 } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
-import api from '../../api';
-import { UserContext } from '../Context/UserContext';
-import { MdDarkMode, MdLightMode } from 'react-icons/md'; // Import both icons
-import { RiLoaderFill } from "react-icons/ri";
-import LoadingScreen from '../Loader/Loading';
 import toast, { Toaster } from 'react-hot-toast';
-import { FaSignOutAlt, FaBars } from 'react-icons/fa'; // Hamburger icon for mobile view
-import ChatSystem from "../Chat/Chat"
+import { FaBars } from 'react-icons/fa'; // Hamburger icon for mobile view
+import { MdDarkMode, MdLightMode } from 'react-icons/md'; // Import both icons
+import api from '../../api';
+import ChatSystem from "../Chat/Chat";
+import { UserContext } from '../Context/UserContext';
+import LoadingScreen from '../Loader/Loading';
 
 
 import Sidebar from '../Sidebar/Sidebar';
@@ -155,6 +154,8 @@ function TodoList() {
   return (
     <div className={`app ${isDarkMode ? 'dark' : ''} ${isModalOpen ? 'blur' : ''} `}>
 
+      <Toaster position="top-center" />
+
       <Sidebar setFilter={setFilter} isOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
       <div className="tasks-container">
 
@@ -176,7 +177,7 @@ function TodoList() {
 
         <div className="task-cards-container">
           {filteredTasks.map((task, index) => (
-            <TaskCard key={index} task={task} onUpdateStatus={updateTaskStatus} onDelete={onDeleteTask} onUpdate={handleUpdate}/>
+            <TaskCard key={index} task={task} onUpdateStatus={updateTaskStatus} onDelete={onDeleteTask} onUpdate={handleUpdate} />
           ))}
 
 
@@ -194,129 +195,129 @@ function TodoList() {
 
       {/* AddTaskModal */}
 
-  <div className='modal-container'>
-      <Dialog
-        className='modal-box'
-        open={isModalOpen}
-        onClose={() => setModalOpen(false)}
-        PaperProps={{
-          style: {
-            backgroundColor: isDarkMode ? '#fff' : '#1f1e1e',
-            marginLeft: '10%',
-            // width: '28%',
-            borderRadius: '15px',
-          },
-        }}
+      <div className='modal-container'>
+        <Dialog
+          className='modal-box'
+          open={isModalOpen}
+          onClose={() => setModalOpen(false)}
+          PaperProps={{
+            style: {
+              backgroundColor: isDarkMode ? '#fff' : '#1f1e1e',
+              marginLeft: '10%',
+              // width: '28%',
+              borderRadius: '15px',
+            },
+          }}
 
-        maxWidth="xs"  
-        fullWidth={true}
-      >
-        <DialogTitle style={{ backgroundColor: isDarkMode ? '#fff' : '#1f1e1e', color: isDarkMode ? 'black' : 'white', fontWeight: 'bold', fontSize: '24px', textAlign: 'center' }}>
-          Create a Task
-        </DialogTitle>
+          maxWidth="xs"
+          fullWidth={true}
+        >
+          <DialogTitle style={{ backgroundColor: isDarkMode ? '#fff' : '#1f1e1e', color: isDarkMode ? 'black' : 'white', fontWeight: 'bold', fontSize: '24px', textAlign: 'center' }}>
+            Create a Task
+          </DialogTitle>
 
-        <DialogContent style={{ backgroundColor: isDarkMode ? '#fff' : '#1f1e1e', scrollbarWidth: 'none', background: 'transparent', marginTop: '-5%' }}>
-          <h2 style={{ color: isDarkMode ? 'black' : 'white' }}>Title</h2>
-          <TextField
-            label="Title"
-            variant="outlined"
-            fullWidth
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-            InputProps={{
-              style: { color: '#fff', backgroundColor: isDarkMode ? '#fff' : 'rgb(27, 26, 26)', borderColor: 'black' },
-            }}
-            InputLabelProps={{
-              style: { color: isDarkMode ? 'black' : '#aaa' },
-            }}
-            style={{ marginBottom: '20px' }}
-            sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'black' } } }}
-          />
-
-
-
-          <h2 style={{ color: isDarkMode ? 'black' : 'white' }}>Description</h2>
-          <TextField
-            label="Description"
-            variant="outlined"
-            fullWidth
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            multiline
-            rows={3}
-            required
-            InputProps={{
-              style: { color: '#fff', backgroundColor: isDarkMode ? '#fff' : 'rgb(27, 26, 26)', borderColor: 'black' },
-            }}
-            InputLabelProps={{
-              style: { color: isDarkMode ? 'black' : '#aaa' },
-            }}
-            style={{ marginBottom: '20px' }}
-            sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'black' } } }}
-          />
+          <DialogContent style={{ backgroundColor: isDarkMode ? '#fff' : '#1f1e1e', scrollbarWidth: 'none', background: 'transparent', marginTop: '-5%' }}>
+            <h2 style={{ color: isDarkMode ? 'black' : 'white' }}>Title</h2>
+            <TextField
+              label="Title"
+              variant="outlined"
+              fullWidth
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+              InputProps={{
+                style: { color: '#fff', backgroundColor: isDarkMode ? '#fff' : 'rgb(27, 26, 26)', borderColor: 'black' },
+              }}
+              InputLabelProps={{
+                style: { color: isDarkMode ? 'black' : '#aaa' },
+              }}
+              style={{ marginBottom: '20px' }}
+              sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'black' } } }}
+            />
 
 
-          <TextField
-            label="Date"
-            type="date"
-            fullWidth
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            InputLabelProps={{ shrink: true, style: { color: isDarkMode ? 'black' : '#aaa' } }}
-            InputProps={{
-              style: { color: isDarkMode ? 'black' : '#fff', backgroundColor: isDarkMode ? '#fff' : 'rgb(27, 26, 26)', borderColor: 'black' },
-            }}
-            style={{ marginBottom: '20px' }}
-            sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'black' } } }}
-          />
 
-          <div className='checkbox'>
-            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={isCompleted}
-                    onChange={(e) => setCompleted(e.target.checked)}
-                    style={{ color: isDarkMode ? 'black' : '#fff' }}
-                  />
-                }
-                label={<span style={{ color: isDarkMode ? 'black' : '#fff' }}>Toggle Completed</span>}
-                labelPlacement="start"
-              />
+            <h2 style={{ color: isDarkMode ? 'black' : 'white' }}>Description</h2>
+            <TextField
+              label="Description"
+              variant="outlined"
+              fullWidth
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              multiline
+              rows={3}
+              required
+              InputProps={{
+                style: { color: '#fff', backgroundColor: isDarkMode ? '#fff' : 'rgb(27, 26, 26)', borderColor: 'black' },
+              }}
+              InputLabelProps={{
+                style: { color: isDarkMode ? 'black' : '#aaa' },
+              }}
+              style={{ marginBottom: '20px' }}
+              sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'black' } } }}
+            />
+
+
+            <TextField
+              label="Date"
+              type="date"
+              fullWidth
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              InputLabelProps={{ shrink: true, style: { color: isDarkMode ? 'black' : '#aaa' } }}
+              InputProps={{
+                style: { color: isDarkMode ? 'black' : '#fff', backgroundColor: isDarkMode ? '#fff' : 'rgb(27, 26, 26)', borderColor: 'black' },
+              }}
+              style={{ marginBottom: '20px' }}
+              sx={{ '& .MuiOutlinedInput-root': { '& fieldset': { borderColor: 'black' } } }}
+            />
+
+            <div className='checkbox'>
+              <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={isCompleted}
+                      onChange={(e) => setCompleted(e.target.checked)}
+                      style={{ color: isDarkMode ? 'black' : '#fff' }}
+                    />
+                  }
+                  label={<span style={{ color: isDarkMode ? 'black' : '#fff' }}>Toggle Completed</span>}
+                  labelPlacement="start"
+                />
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={isImportant}
+                      onChange={(e) => setImportant(e.target.checked)}
+                      style={{ color: isDarkMode ? 'black' : '#fff' }}
+                    />
+                  }
+                  label={<span style={{ color: isDarkMode ? 'black' : '#fff' }}>Toggle Important</span>}
+                  labelPlacement="start"
+                />
+              </div>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={isImportant}
-                    onChange={(e) => setImportant(e.target.checked)}
-                    style={{ color: isDarkMode ? 'black' : '#fff' }}
-                  />
-                }
-                label={<span style={{ color: isDarkMode ? 'black' : '#fff' }}>Toggle Important</span>}
-                labelPlacement="start"
-              />
-            </div>
-          </div>
-        </DialogContent>
+          </DialogContent>
 
-        <DialogActions style={{ backgroundColor: isDarkMode ? '#fff' : '#1f1e1e', }}>
-          <Button onClick={() => setModalOpen(false)} style={{ color: '#fff', backgroundColor: '#ff5252' }}>
-            Close
-          </Button>
-          <Button
-            onClick={handleAddTask}
-            style={{ color: '#fff', backgroundColor: '#008cba' }}
-            disabled={isSubmitting} // Disable button if submitting
-          >
-            + Create Task
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </div>
+          <DialogActions style={{ backgroundColor: isDarkMode ? '#fff' : '#1f1e1e', }}>
+            <Button onClick={() => setModalOpen(false)} style={{ color: '#fff', backgroundColor: '#ff5252' }}>
+              Close
+            </Button>
+            <Button
+              onClick={handleAddTask}
+              style={{ color: '#fff', backgroundColor: '#008cba' }}
+              disabled={isSubmitting} // Disable button if submitting
+            >
+              + Create Task
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
 
-    <ChatSystem/>
+      <ChatSystem />
     </div>
   );
 }

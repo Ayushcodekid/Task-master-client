@@ -532,7 +532,7 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
                               <ListItemText primary={project.name} />
                               <Button>
                                 <MdOutlineGroupAdd
-                                  style={{ cursor: 'pointer', fontSize: '24px', color: 'white', marginRight: '-100%' }}
+                                  style={{ cursor: 'pointer', fontSize: '24px', color: isDarkMode ? 'black' :'white', marginRight: '-100%' }}
                                   onClick={(e) => {
                                     setOpenAddUserModal(true);
                                     e.stopPropagation();
@@ -561,7 +561,8 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
                         color: isDarkMode ? 'black' : 'white',
                         fontSize: '16px',
                         marginLeft: '5%',
-                        fontWeight: 'bold'
+                        fontWeight: 'bold',
+                        textWrap: 'nowrap'
                       }}
                     >
                       Associated Projects
