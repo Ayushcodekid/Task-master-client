@@ -9,7 +9,7 @@ const socket = io('https://task-master-2.onrender.com');
 const Chat = () => { 
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([]);  // Ensure messages is initialized as an empty array
-  const [isChatOpen, setIsChatOpen] = useState(true); // Controls popup visibility
+  const [isChatOpen, setIsChatOpen] = useState(false); // Controls popup visibility
   const [projectName, setProjectName] = useState(''); // New state to store project name
 
   const { user, setUser, isDarkMode } = useContext(UserContext); // Access user from context
