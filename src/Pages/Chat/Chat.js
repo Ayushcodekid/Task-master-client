@@ -100,48 +100,56 @@ const Chat = () => {
   };
 
   return (
-    <div className='chat-system' 
+    <div
+      className="chat-system"
       style={{
         position: 'absolute',
         bottom: window.innerWidth < 780 ? '1%' : '2%',
-        right: '5.2%',
-        width: window.innerWidth < 780 ? '75%' : '25%', // Adjusts width for mobile
-        height: isChatOpen ? '400px' : '50px',
-        backgroundImage: 'radial-gradient(circle 1300px at 58% 90%, #243447, #0f0f14 70%)',
-        borderRadius: '10px',
+        right: window.innerWidth < 780 ? '1%' : '5.2%',
+        width: window.innerWidth < 780 ? '90%' : '25%',
+        height: isChatOpen ? '400px' : '60px',
+        backgroundImage: 'radial-gradient(circle 1300px at 58% 90%, #2c3e50, #1a252f 70%)',
+        borderRadius: '12px',
         overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-        transition: '0.3s ease',
+        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)',
+        transition: '0.5s ease',
       }}
     >
       {/* Header */}
       <div
         style={{
-          backgroundColor: isDarkMode ? 'white': 'black',
-          color: isDarkMode ? 'black': 'white',
-          padding: '10px',
+          backgroundColor: isDarkMode ? 'white' : '#34495e',
+          color: isDarkMode ? 'black' : 'white',
+          padding: '12px 15px',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
           cursor: 'pointer',
+          borderBottom: '1px solid #7f8c8d',
+          borderTopLeftRadius: '12px',
+          borderTopRightRadius: '12px',
         }}
         onClick={() => setIsChatOpen(!isChatOpen)}
       >
-        <h3 style={{ margin: 0, fontSize: '1rem' }}> {projectName}</h3>
+        <h3 style={{ margin: 0, fontSize: '1.1rem' }}>{projectName} Chats</h3>
         <span>{isChatOpen ? '▼' : '▲'}</span>
       </div>
-
+  
       {/* Messages Area */}
       {isChatOpen && (
-        <div className='chat-body'
+        <div
+          className="chat-body"
           style={{
             flex: 1,
-            padding: '10px',
+            padding: '15px',
             overflowY: 'auto',
-           backgroundColor: '#02486e',
-           scrollbarWidth: 'none'
+            backgroundColor: isDarkMode ? 'white' : '#2c3e50',
+            color: '#ecf0f1',
+            borderBottom: '1px solid #7f8c8d',
+            borderRadius: '2px',
+            scrollbarWidth: 'none'
           }}
         >
           {Array.isArray(messages) && messages.length > 0 ? (
@@ -151,28 +159,30 @@ const Chat = () => {
                 style={{
                   display: 'flex',
                   justifyContent: msg.senderemail === email ? 'flex-end' : 'flex-start',
-                  marginBottom: '10px',
+                  marginBottom: '15px',
                 }}
               >
                 <div
                   style={{
                     maxWidth: '70%',
-                    padding: '10px',
-                    backgroundColor: msg.senderemail === email ? '#01796F' : '#013E3E',
-                    color: '#FFF',
-                    borderRadius: '10px',
+                    padding: '12px',
+                    backgroundColor: msg.senderemail === email ? '#3498db' : '#95a5a6',
+                    color: isDarkMode ? 'black' : '#FFF',
+                    borderRadius: '20px',
+                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.2)',
                   }}
                 >
                   <p
                     style={{
                       margin: 0,
-                      fontSize: '0.8rem',
-                      opacity: 0.8,
+                      fontSize: '0.9rem',
+                      opacity: 0.9,
+                      fontWeight: 'bold',
                     }}
                   >
                     {msg.senderemail}
                   </p>
-                  <p style={{ margin: '5px 0' }}>{msg.message}</p>
+                  <p style={{ margin: '5px 0', fontSize: '1rem' }}>{msg.message}</p>
                 </div>
               </div>
             ))
@@ -181,16 +191,18 @@ const Chat = () => {
           )}
         </div>
       )}
-
+  
       {/* Input Area */}
       {isChatOpen && (
         <form
           onSubmit={handleSendMessage}
           style={{
             display: 'flex',
-            padding: '5px',
-            backgroundColor: 'white',
-            borderTop: '1px solid #025E4C',
+            padding: '10px 15px',
+            backgroundColor: '#34495e',
+            borderTop: '1px solid #7f8c8d',
+            borderBottomLeftRadius: '12px',
+            borderBottomRightRadius: '12px',
           }}
         >
           <input
@@ -200,22 +212,24 @@ const Chat = () => {
             placeholder="Type your message here..."
             style={{
               flex: 1,
-              padding: '10px',
+              padding: '12px',
               border: 'none',
-              borderRadius: '5px',
+              borderRadius: '20px',
               marginRight: '10px',
               outline: 'none',
+              fontSize: '1rem',
             }}
           />
           <button
             type="submit"
             style={{
-              padding: '10px',
-              backgroundColor: '#01796F',
+              padding: '12px',
+              backgroundColor: '#3498db',
               border: 'none',
               color: '#FFF',
-              borderRadius: '5px',
+              borderRadius: '20px',
               cursor: 'pointer',
+              fontSize: '1.1rem',
             }}
           >
             ➤
@@ -224,7 +238,7 @@ const Chat = () => {
       )}
     </div>
   );
-};
+}  
 
 export default Chat;
 
