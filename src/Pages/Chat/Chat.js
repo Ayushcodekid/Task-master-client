@@ -103,7 +103,7 @@ const Chat = () => {
     <div className='chat-system' 
       style={{
         position: 'absolute',
-        bottom: window.innerWidth < 780 ? '5%' : '2%',
+        bottom: window.innerWidth < 780 ? '1%' : '2%',
         right: '5.2%',
         width: window.innerWidth < 780 ? '75%' : '25%', // Adjusts width for mobile
         height: isChatOpen ? '400px' : '50px',
