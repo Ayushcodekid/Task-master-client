@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
-import io from 'socket.io-client';
 import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
+import io from 'socket.io-client';
 import { UserContext } from '../Context/UserContext';
 
 const socket = io('https://task-master-2.onrender.com');
@@ -101,10 +101,10 @@ const Chat = () => {
   return (
     <div 
       style={{
-        position: 'fixed',
-        bottom: '20px',
+        position: 'absolute',
+        bottom: '0%',
         right: '5.2%',
-        width: isChatOpen ? '20%' : '20%',
+        width: isChatOpen ? '24%' : '24%',
         height: isChatOpen ? '400px' : '50px',
         backgroundImage: 'radial-gradient(circle 1300px at 58% 90%, #243447, #0f0f14 70%)',
         borderRadius: '10px',
@@ -139,7 +139,8 @@ const Chat = () => {
             flex: 1,
             padding: '10px',
             overflowY: 'auto',
-           backgroundColor: '#02486e'
+           backgroundColor: '#02486e',
+           scrollbarWidth: 'none'
           }}
         >
           {Array.isArray(messages) && messages.length > 0 ? (

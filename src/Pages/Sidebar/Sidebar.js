@@ -550,7 +550,7 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
                 </>
               )}
             </div>
-            <Button style={{ marginLeft: '20%', marginTop: '4%' }} variant="contained" color="primary" onClick={() => setOpenModal(true)}>
+            <Button style={{ marginLeft: '10%', marginTop: '4%' }} variant="contained" color="primary" onClick={() => setOpenModal(true)}>
               Add Project
             </Button>
           </Collapse>
