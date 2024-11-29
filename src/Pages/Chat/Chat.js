@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import io from 'socket.io-client';
 import axios from 'axios';
 import { UserContext } from '../Context/UserContext';
+import "./Chat.css";
 
 const socket = io('https://task-master-2.onrender.com');
 
@@ -11,7 +12,7 @@ const Chat = () => {
   const [isChatOpen, setIsChatOpen] = useState(true); // Controls popup visibility
   const [projectName, setProjectName] = useState(''); // New state to store project name
 
-  const { user, setUser } = useContext(UserContext); // Access user from context
+  const { user, setUser, isDarkMode } = useContext(UserContext); // Access user from context
 
   const username = user?.username;
   const userId = user?.userId;
@@ -99,12 +100,12 @@ const Chat = () => {
   };
 
   return (
-    <div 
+    <div className='chat-system' 
       style={{
         position: 'absolute',
-        bottom: '2%',
+        bottom: window.innerWidth < 780 ? '5%' : '2%',
         right: '5.2%',
-        width: isChatOpen ? '25%' : '25%',
+        width: window.innerWidth < 780 ? '75%' : '25%', // Adjusts width for mobile
         height: isChatOpen ? '400px' : '50px',
         backgroundImage: 'radial-gradient(circle 1300px at 58% 90%, #243447, #0f0f14 70%)',
         borderRadius: '10px',
@@ -118,8 +119,8 @@ const Chat = () => {
       {/* Header */}
       <div
         style={{
-          backgroundColor: 'black',
-          color: '#FFF',
+          backgroundColor: isDarkMode ? 'white': 'black',
+          color: isDarkMode ? 'black': 'white',
           padding: '10px',
           display: 'flex',
           justifyContent: 'space-between',

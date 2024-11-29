@@ -622,7 +622,13 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: '20%',
+            width: {
+              xs: '70%',
+              sm: '45%',
+              md: '35%',
+              lg: '25%',
+              xl: '20%'
+            },
             bgcolor: 'background.paper',
             borderRadius: 2,
             boxShadow: 24,
@@ -664,7 +670,13 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: '20%',
+            width: {
+              xs: '70%',
+              sm: '45%',
+              md: '35%',
+              lg: '25%',
+              xl: '20%'
+            },
             bgcolor: 'background.paper',
             borderRadius: 2,
             boxShadow: 24,
