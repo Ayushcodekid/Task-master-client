@@ -615,7 +615,7 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
 
 
       {/* Create Project Modal */}
-      <Modal style={{ backgroundColor: 'transparent', backdropFilter: 'blur(2px)', }} open={openModal} onClose={() => setOpenModal(false)}>
+      <Modal style={{ backgroundColor: 'transparent', backdropFilter: 'blur(5px)', }} open={openModal} onClose={() => setOpenModal(false)}>
         <Box
           sx={{
             position: 'absolute',
@@ -663,7 +663,7 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
       </Modal>
 
       {/* Add User Modal */}
-      <Modal style={{ backgroundColor: 'transparent', backdropFilter: 'blur(2px)' }} open={openAddUserModal} onClose={() => setOpenAddUserModal(false)}>
+      <Modal style={{ backgroundColor: 'transparent', backdropFilter: 'blur(5px)' }} open={openAddUserModal} onClose={() => setOpenAddUserModal(false)}>
         <Box
           sx={{
             position: 'absolute',
