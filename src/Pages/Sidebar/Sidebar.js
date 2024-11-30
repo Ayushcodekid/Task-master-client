@@ -319,17 +319,17 @@
 
 
 
-import React, { useContext, useState, useEffect, useRef } from 'react';
-import { UserContext } from '../Context/UserContext';
-import api from '../../api';
+import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
+import { Box, Button, Collapse, List, ListItem, ListItemText, Modal, TextField, } from '@mui/material';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import toast from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
 import { FaSignOutAlt } from 'react-icons/fa';
-import { Modal, Button, TextField, Collapse, List, ListItem, ListItemText, Box , } from '@mui/material';
-import { KeyboardArrowUp, KeyboardArrowDown } from '@mui/icons-material';
-import { MdOutlineGroupAdd } from "react-icons/md";
-import LoadingScreen from '../Loader/Loading';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import { MdOutlineGroupAdd } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
+import api from '../../api';
+import { UserContext } from '../Context/UserContext';
+import LoadingScreen from '../Loader/Loading';
 import './Sidebar.css';
 
 function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
@@ -532,7 +532,7 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
                               <ListItemText primary={project.name} />
                               <Button>
                                 <MdOutlineGroupAdd
-                                  style={{ cursor: 'pointer', fontSize: '24px', color: 'white', marginRight: '-100%' }}
+                                  style={{ cursor: 'pointer', fontSize: '24px', color: isDarkMode ? 'black' :'white', marginRight: '-100%' }}
                                   onClick={(e) => {
                                     setOpenAddUserModal(true);
                                     e.stopPropagation();
@@ -561,7 +561,8 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
                         color: isDarkMode ? 'black' : 'white',
                         fontSize: '16px',
                         marginLeft: '5%',
-                        fontWeight: 'bold'
+                        fontWeight: 'bold',
+                        textWrap: 'nowrap'
                       }}
                     >
                       Associated Projects

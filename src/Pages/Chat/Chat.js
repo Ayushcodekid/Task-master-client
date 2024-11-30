@@ -1,6 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
-import io from 'socket.io-client';
 import axios from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
+import io from 'socket.io-client';
 import { UserContext } from '../Context/UserContext';
 import "./Chat.css";
 
