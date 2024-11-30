@@ -20,43 +20,49 @@ const Chat = () => {
 
   const projectId = localStorage.getItem('selectedProjectId'); // Get projectId from localStorage
 
-  useEffect(() => {
-    if (projectId) {
-      // Reset messages when project changes
-      setMessages([]);
-      setMessage('');
+ useEffect(() => {
+  if (projectId) {
+    // Reset messages when project changes
+    setMessages([]);
+    setMessage('');
 
-      // Fetch project and chat history in a single API call
-      axios
-        .get(`https://task-master-2.onrender.com/api/projects/chat/${projectId}`) // Assuming the new backend endpoint
-        .then((response) => {
-          const { data } = response.data;  // Data contains both messages and project name
+    // Fetch project and chat history in a single API call
+    axios
+      .get(`https://task-master-2.onrender.com/api/projects/chat/${projectId}`)
+      .then((response) => {
+        const { data } = response.data;
 
-          if (data && data.length > 0) {
-            setProjectName(data[0].projectname);  // Set project name from the response
-            console.log("Project Name:", data[0].projectname);
+        if (data && data.length > 0) {
+          setProjectName(data[0].projectname);
+          setMessages(data);
+        } else {
+          console.error('No data found for this project.');
+        }
+      })
+      .catch((err) => console.error('Error fetching project and chat data:', err));
 
-            setMessages(data);  // Set all chat messages
-            console.log("Messages:", data);
+    // Join the new project's chat room
+    socket.emit('joinProject', { projectId });
 
-          } else {
-            console.error('No data found for this project.');
-          }
-        })
-        .catch((err) => console.error('Error fetching project and chat data:', err));
+    // Listen for new messages
+    socket.on('receiveMessage', (newMessage) => {
+      // Only add messages for the current project
+      if (newMessage.projectId === projectId) {
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
+      }
+    });
 
-      // Join the new project's chat room
-      socket.emit('joinProject', { projectId });
-      console.log("Joined project:", projectId);
-    } else {
-      console.error('ProjectId is undefined or missing!');
-    }
+    console.log("Joined project:", projectId);
+  } else {
+    console.error('ProjectId is undefined or missing!');
+  }
 
-    // Cleanup the socket listener to prevent duplicate handling
-    return () => {
-      socket.off('receiveMessage');
-    };
-  }, [projectId]);
+  // Cleanup the socket listener
+  return () => {
+    socket.off('receiveMessage');
+  };
+}, [projectId]);
+
 
   const handleSendMessage = (e) => {
     e.preventDefault();
