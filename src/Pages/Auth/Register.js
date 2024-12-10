@@ -34,7 +34,7 @@
 
 //   const validate = () => {
 //     const newErrors = {};
-
+  
 //     if (!formData.email.trim()) {
 //       newErrors.email = 'Email is required';
 //       toast.error('Email is required');  // Show toast error for email validation
@@ -59,10 +59,10 @@
 //       newErrors.password = 'Password must contain at least one special character';
 //       toast.error('Password must contain at least one special character');  // Show toast error for missing special character
 //     }
-
+  
 //     return newErrors;
 //   }
-
+  
 
 //   const handleSubmit = async (e) => {
 //     e.preventDefault();
@@ -172,7 +172,7 @@
 
 //         <div className="google-login-btn">
 
-
+          
 //         </div>
 //       </div>
 //     </div>
@@ -298,13 +298,13 @@ const Register = () => {
       toast.error("Please enter the verification code.");
       return;
     }
-
+  
     try {
       const response = await api.post('/verify-email', {
         email: formData.email,
         code: verificationCode
       });
-
+  
       toast.success(response.data.message);
       navigate('/');  // Redirect to login or home after verification
     } catch (error) {
@@ -314,14 +314,11 @@ const Register = () => {
       toast.error(error.response?.data?.message || "Verification failed");
     }
   };
-
+  
 
   return (
     <div className="register-body">
-      <head>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7373602669477643"
-          crossorigin="anonymous"></script>
-      </head>
+     
       <div className="register-container">
         <Toaster position="top-center" />
         {!isVerificationRequired ? (
