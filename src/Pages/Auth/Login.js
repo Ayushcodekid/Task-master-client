@@ -62,7 +62,7 @@ const Login = () => {
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       for (let error in validationErrors) {
-        toast.error(validationErrors[error]);  
+        toast.error(validationErrors[error]);
       }
       return;
     }
@@ -83,7 +83,7 @@ const Login = () => {
       const { token, userId, username, email } = response.data;
 
       console.log("email", email);
-      
+
 
       if (!userId) {
         console.error("userId is undefined!"); // Log error if userId is missing
@@ -157,6 +157,10 @@ const Login = () => {
 
   return (
     <div className="login-body">
+      <head>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7373602669477643"
+          crossorigin="anonymous"></script>
+      </head>
       <div className="login-container">
         <form className="login-form" onSubmit={handleSubmit}>
           <h1 className="login-title" style={{ color: 'white' }}>Login</h1>
@@ -169,8 +173,8 @@ const Login = () => {
             onFailure={handleGoogleFailure}
             cookiePolicy="single_host_origin"
             size="large"
-            shape="square"  
-            />
+            shape="square"
+          />
 
 
 

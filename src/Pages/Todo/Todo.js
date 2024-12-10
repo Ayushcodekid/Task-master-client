@@ -152,8 +152,12 @@ function TodoList() {
 
 
   return (
-    <div className={`app ${isDarkMode ? 'dark' : ''} ${isModalOpen ? 'blur' : ''} `}>
 
+    <div className={`app ${isDarkMode ? 'dark' : ''} ${isModalOpen ? 'blur' : ''} `}>
+      <head>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7373602669477643"
+          crossorigin="anonymous"></script>
+      </head>
       <Toaster position="top-center" />
 
       <Sidebar setFilter={setFilter} isOpen={isSidebarOpen} setIsSidebarOpen={setIsSidebarOpen} />
