@@ -1,5 +1,3 @@
-
-
 // import React, { useContext, useState, useEffect, useRef } from 'react';
 // import { UserContext } from '../Context/UserContext';
 // import api from '../../api';
@@ -12,7 +10,6 @@
 // import { MdOutlineGroupAdd } from "react-icons/md";
 // import LoadingScreen from '../Loader/Loading';
 // import { MdOutlinePersonAddAlt } from "react-icons/md";
-
 
 // import './Sidebar.css';
 
@@ -110,8 +107,6 @@
 //     navigate('/');
 //   };
 
-
-
 //   const handleProjectSelection = (projectId) => {
 //     // Update the context and local storage
 //     selectProject(projectId);
@@ -202,8 +197,6 @@
 //           </Collapse>
 //         </ul>
 //       </nav>
-
-
 
 //       <Modal
 //         style={{
@@ -298,56 +291,45 @@
 
 // export default Sidebar;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import { KeyboardArrowDown, KeyboardArrowUp } from '@mui/icons-material';
-import { Box, Button, Collapse, List, ListItem, ListItemText, Modal, TextField, } from '@mui/material';
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import toast from 'react-hot-toast';
-import { FaSignOutAlt } from 'react-icons/fa';
-import { IoMdArrowRoundBack } from 'react-icons/io';
+import { KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
+import {
+  Box,
+  Button,
+  Collapse,
+  List,
+  ListItem,
+  ListItemText,
+  Modal,
+  TextField,
+} from "@mui/material";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
+import { FaSignOutAlt } from "react-icons/fa";
+import { IoMdArrowRoundBack } from "react-icons/io";
 import { MdOutlineGroupAdd } from "react-icons/md";
-import { useNavigate } from 'react-router-dom';
-import api from '../../api';
-import { UserContext } from '../Context/UserContext';
-import LoadingScreen from '../Loader/Loading';
-import './Sidebar.css';
+import { useNavigate } from "react-router-dom";
+import api from "../../api";
+import { UserContext } from "../Context/UserContext";
+import LoadingScreen from "../Loader/Loading";
+import "./Sidebar.css";
 
 function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
-  const [selectedFilter, setSelectedFilter] = useState('all');
+  const [selectedFilter, setSelectedFilter] = useState("all");
   const [projectsCreatedByUser, setProjectsCreatedByUser] = useState([]);
   const [projectsAddedToUser, setProjectsAddedToUser] = useState([]);
-  const [newProject, setNewProject] = useState({ name: '', description: '' });
+  const [newProject, setNewProject] = useState({ name: "", description: "" });
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [openAddUserModal, setOpenAddUserModal] = useState(false);
-  const [selectedProject, setSelectedProject] = useState('');
+  const [selectedProject, setSelectedProject] = useState("");
   const [showProjects, setShowProjects] = useState(false);
   const [showYourProjects, setShowYourProjects] = useState(false);
   const [showAssociatedProjects, setShowAssociatedProjects] = useState(false);
 
-  const [emailToAdd, setEmailToAdd] = useState(''); // Email input state for adding users
-  const { user, setUser, isDarkMode, projectId, selectProject } = useContext(UserContext); // Access user, dark mode, and projectId from context
+  const [emailToAdd, setEmailToAdd] = useState(""); // Email input state for adding users
+  const { user, setUser, isDarkMode, projectId, selectProject } =
+    useContext(UserContext); // Access user, dark mode, and projectId from context
   const sidebarRef = useRef(null);
   const navigate = useNavigate();
 
@@ -360,7 +342,7 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
     if (userId) {
       fetchProjects();
     } else {
-      navigate('/todo');
+      navigate("/todo");
     }
   }, [userId, navigate]);
 
@@ -373,33 +355,30 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
       // Set the state for the creator and participant projects
       setProjectsCreatedByUser(creatorProjects);
       setProjectsAddedToUser(participantProjects);
-
     } catch (err) {
-      setError('Failed to fetch projects. Please try again.');
-      toast.error('Error fetching projects.');
+      setError("Failed to fetch projects. Please try again.");
+      toast.error("Error fetching projects.");
     } finally {
       setLoading(false);
     }
   };
-
-
 
   const handleCreateProject = async (e) => {
     e.preventDefault();
     setOpenModal(false);
     setLoading(true);
     try {
-      const response = await api.post('/createproject', {
+      const response = await api.post("/createproject", {
         ...newProject,
         createdBy: email,
       });
-      toast.success('Project created successfully.');
-      setNewProject({ name: '', description: '' });
+      toast.success("Project created successfully.");
+      setNewProject({ name: "", description: "" });
       fetchProjects();
       setOpenModal(false);
     } catch (err) {
-      setError('Failed to create project. Please try again.');
-      toast.error('Error creating project.');
+      setError("Failed to create project. Please try again.");
+      toast.error("Error creating project.");
     } finally {
       setLoading(false);
     }
@@ -407,22 +386,22 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
 
   const handleAddUserToProject = async () => {
     if (!emailToAdd) {
-      toast.error('Please enter an email.');
+      toast.error("Please enter an email.");
       return;
     }
     setOpenAddUserModal(false);
     setLoading(true);
     try {
-      const response = await api.post('/projects/add-user', {
+      const response = await api.post("/projects/add-user", {
         projectId: projectId, // Pass the selected project ID
         userEmail: emailToAdd, // Pass the email of the user to be added
       });
 
-      toast.success('User added to the project!');
-      setEmailToAdd(''); // Reset email field
+      toast.success("User added to the project!");
+      setEmailToAdd(""); // Reset email field
       setOpenAddUserModal(false); // Close the modal
     } catch (err) {
-      toast.error('Error adding user. Please try again.');
+      toast.error("Error adding user. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -431,10 +410,8 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
   const handleProjectSelection = (projectId) => {
     // Update the context and local storage
     selectProject(projectId);
-    localStorage.setItem('selectedProjectId', projectId);
+    localStorage.setItem("selectedProjectId", projectId);
   };
-
-
 
   const handleFilterClick = (filter) => {
     setFilter(filter);
@@ -443,27 +420,48 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
 
   const handleSignOut = () => {
     setUser(null);
-    localStorage.removeItem('user');
-    navigate('/');
+    localStorage.removeItem("user");
+    navigate("/login");
   };
 
   return (
-    <div ref={sidebarRef} className={`sidebar ${isDarkMode ? 'dark' : ''} ${isOpen ? 'open' : 'closed'}`}>
-      <IoMdArrowRoundBack className="back-btn" onClick={() => setIsSidebarOpen(false)} />
+    <div
+      ref={sidebarRef}
+      className={`sidebar ${isDarkMode ? "dark" : ""} ${
+        isOpen ? "open" : "closed"
+      }`}
+    >
+      <IoMdArrowRoundBack
+        className="back-btn"
+        onClick={() => setIsSidebarOpen(false)}
+      />
       <div className="profile">
-        <img src="https://via.placeholder.com/100" alt="Profile" className="profile-img" />
+        <img
+          src="https://via.placeholder.com/100"
+          alt="Profile"
+          className="profile-img"
+        />
         <h3 className="profile-name">Welcome, {username}</h3>
       </div>
 
       <nav className="nav">
         <ul>
-          <li className={selectedFilter === 'all' ? 'active' : ''} onClick={() => handleFilterClick('all')}>
+          <li
+            className={selectedFilter === "all" ? "active" : ""}
+            onClick={() => handleFilterClick("all")}
+          >
             All Tasks
           </li>
-          <li className={selectedFilter === 'important' ? 'active' : ''} onClick={() => handleFilterClick('important')}>
+          <li
+            className={selectedFilter === "important" ? "active" : ""}
+            onClick={() => handleFilterClick("important")}
+          >
             Important!
           </li>
-          <li className={selectedFilter === 'completed' ? 'active' : ''} onClick={() => handleFilterClick('completed')}>
+          <li
+            className={selectedFilter === "completed" ? "active" : ""}
+            onClick={() => handleFilterClick("completed")}
+          >
             Completed!
           </li>
 
@@ -473,13 +471,13 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
             onClick={() => setShowProjects(!showProjects)}
             endIcon={showProjects ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
             style={{
-              width: '100%',
-              justifyContent: 'flex-start',
-              textTransform: 'none',
-              color: isDarkMode ? 'black' : 'white',
-              fontSize: '18px',
-              marginLeft: '5%',
-              fontWeight: 'bold',
+              width: "100%",
+              justifyContent: "flex-start",
+              textTransform: "none",
+              color: isDarkMode ? "black" : "white",
+              fontSize: "18px",
+              marginLeft: "5%",
+              fontWeight: "bold",
             }}
           >
             Projects
@@ -499,16 +497,21 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
                     <Button
                       variant="text"
                       onClick={() => setShowYourProjects(!showYourProjects)}
-                      endIcon={showYourProjects ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+                      endIcon={
+                        showYourProjects ? (
+                          <KeyboardArrowUp />
+                        ) : (
+                          <KeyboardArrowDown />
+                        )
+                      }
                       style={{
-                        width: '100%',
-                        justifyContent: 'flex-start',
-                        textTransform: 'none',
-                        color: isDarkMode ? 'black' : 'white',
-                        fontSize: '16px',
-                        marginLeft: '5%',
-                        fontWeight: 'bold'
-
+                        width: "100%",
+                        justifyContent: "flex-start",
+                        textTransform: "none",
+                        color: isDarkMode ? "black" : "white",
+                        fontSize: "16px",
+                        marginLeft: "5%",
+                        fontWeight: "bold",
                       }}
                     >
                       Your Projects
@@ -522,17 +525,25 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
                             <ListItem
                               key={project.id}
                               style={{
-                                backgroundColor: projectId === project.id ? '#4a90e2' : 'transparent',
-                                borderRadius: '4px',
-                                padding: '5px 10px',
-                                marginLeft: '6%'
+                                backgroundColor:
+                                  projectId === project.id
+                                    ? "#4a90e2"
+                                    : "transparent",
+                                borderRadius: "4px",
+                                padding: "5px 10px",
+                                marginLeft: "6%",
                               }}
                               onClick={() => handleProjectSelection(project.id)}
                             >
                               <ListItemText primary={project.name} />
                               <Button>
                                 <MdOutlineGroupAdd
-                                  style={{ cursor: 'pointer', fontSize: '24px', color: isDarkMode ? 'black' :'white', marginRight: '-100%' }}
+                                  style={{
+                                    cursor: "pointer",
+                                    fontSize: "24px",
+                                    color: isDarkMode ? "black" : "white",
+                                    marginRight: "-100%",
+                                  }}
                                   onClick={(e) => {
                                     setOpenAddUserModal(true);
                                     e.stopPropagation();
@@ -552,17 +563,25 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
                   <div className="projects-section">
                     <Button
                       variant="text"
-                      onClick={() => setShowAssociatedProjects(!showAssociatedProjects)}
-                      endIcon={showAssociatedProjects ? <KeyboardArrowUp /> : <KeyboardArrowDown />}
+                      onClick={() =>
+                        setShowAssociatedProjects(!showAssociatedProjects)
+                      }
+                      endIcon={
+                        showAssociatedProjects ? (
+                          <KeyboardArrowUp />
+                        ) : (
+                          <KeyboardArrowDown />
+                        )
+                      }
                       style={{
-                        width: '100%',
-                        justifyContent: 'flex-start',
-                        textTransform: 'none',
-                        color: isDarkMode ? 'black' : 'white',
-                        fontSize: '16px',
-                        marginLeft: '5%',
-                        fontWeight: 'bold',
-                        textWrap: 'nowrap'
+                        width: "100%",
+                        justifyContent: "flex-start",
+                        textTransform: "none",
+                        color: isDarkMode ? "black" : "white",
+                        fontSize: "16px",
+                        marginLeft: "5%",
+                        fontWeight: "bold",
+                        textWrap: "nowrap",
                       }}
                     >
                       Associated Projects
@@ -576,11 +595,13 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
                             <ListItem
                               key={project.id}
                               style={{
-                                backgroundColor: projectId === project.id ? '#4a90e2' : 'transparent',
-                                borderRadius: '4px',
-                                padding: '5px 10px',
-                                marginLeft: '6%'
-
+                                backgroundColor:
+                                  projectId === project.id
+                                    ? "#4a90e2"
+                                    : "transparent",
+                                borderRadius: "4px",
+                                padding: "5px 10px",
+                                marginLeft: "6%",
                               }}
                               onClick={() => handleProjectSelection(project.id)}
                             >
@@ -596,10 +617,10 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
             </div>
             <Button
               style={{
-                marginTop: '4%',
-                textWrap: 'nowrap',
-                display: 'block',
-                margin: '4% auto',
+                marginTop: "4%",
+                textWrap: "nowrap",
+                display: "block",
+                margin: "4% auto",
               }}
               variant="contained"
               color="primary"
@@ -608,42 +629,44 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
               Add Project
             </Button>
           </Collapse>
-
-
         </ul>
       </nav>
 
-
-
       {/* Create Project Modal */}
-      <Modal style={{ backgroundColor: 'transparent', backdropFilter: 'blur(5px)', }} open={openModal} onClose={() => setOpenModal(false)}>
+      <Modal
+        style={{ backgroundColor: "transparent", backdropFilter: "blur(5px)" }}
+        open={openModal}
+        onClose={() => setOpenModal(false)}
+      >
         <Box
           sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
             width: {
-              xs: '70%',
-              sm: '45%',
-              md: '35%',
-              lg: '25%',
-              xl: '20%'
+              xs: "70%",
+              sm: "45%",
+              md: "35%",
+              lg: "25%",
+              xl: "20%",
             },
-            bgcolor: 'background.paper',
+            bgcolor: "background.paper",
             borderRadius: 2,
             boxShadow: 24,
             p: 3,
           }}
         >
-          <h2 style={{ textAlign: 'center' }}>Create New Project</h2>
+          <h2 style={{ textAlign: "center" }}>Create New Project</h2>
           <form onSubmit={handleCreateProject}>
             <TextField
               label="Project Name"
               variant="outlined"
               fullWidth
               value={newProject.name}
-              onChange={(e) => setNewProject({ ...newProject, name: e.target.value })}
+              onChange={(e) =>
+                setNewProject({ ...newProject, name: e.target.value })
+              }
               required
               sx={{ mb: 2 }}
             />
@@ -652,39 +675,51 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
               variant="outlined"
               fullWidth
               value={newProject.description}
-              onChange={(e) => setNewProject({ ...newProject, description: e.target.value })}
+              onChange={(e) =>
+                setNewProject({ ...newProject, description: e.target.value })
+              }
               required
               sx={{ mb: 2 }}
             />
-            <Button type="submit" variant="contained" color="primary" disabled={loading} sx={{ display: 'block', margin: '0 auto' }}>
-              {loading ? 'Creating...' : 'Create Project'}
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              disabled={loading}
+              sx={{ display: "block", margin: "0 auto" }}
+            >
+              {loading ? "Creating..." : "Create Project"}
             </Button>
           </form>
         </Box>
       </Modal>
 
       {/* Add User Modal */}
-      <Modal style={{ backgroundColor: 'transparent', backdropFilter: 'blur(5px)' }} open={openAddUserModal} onClose={() => setOpenAddUserModal(false)}>
+      <Modal
+        style={{ backgroundColor: "transparent", backdropFilter: "blur(5px)" }}
+        open={openAddUserModal}
+        onClose={() => setOpenAddUserModal(false)}
+      >
         <Box
           sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
             width: {
-              xs: '70%',
-              sm: '45%',
-              md: '35%',
-              lg: '25%',
-              xl: '20%'
+              xs: "70%",
+              sm: "45%",
+              md: "35%",
+              lg: "25%",
+              xl: "20%",
             },
-            bgcolor: 'background.paper',
+            bgcolor: "background.paper",
             borderRadius: 2,
             boxShadow: 24,
             p: 3,
           }}
         >
-          <h2 style={{ textAlign: 'center' }}>Add User to Project</h2>
+          <h2 style={{ textAlign: "center" }}>Add User to Project</h2>
           <TextField
             label="Enter User Email"
             variant="outlined"
@@ -694,8 +729,14 @@ function Sidebar({ setFilter, isOpen, setIsSidebarOpen }) {
             required
             sx={{ mb: 2 }}
           />
-          <Button onClick={handleAddUserToProject} variant="contained" color="primary" sx={{ display: 'block', margin: '0 auto' }} disabled={loading}>
-            {loading ? 'Adding...' : 'Add User'}
+          <Button
+            onClick={handleAddUserToProject}
+            variant="contained"
+            color="primary"
+            sx={{ display: "block", margin: "0 auto" }}
+            disabled={loading}
+          >
+            {loading ? "Adding..." : "Add User"}
           </Button>
         </Box>
       </Modal>
