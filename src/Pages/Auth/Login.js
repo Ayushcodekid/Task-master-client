@@ -127,6 +127,7 @@ const Login = () => {
 
   const handleGoogleLogin = async (response) => {
     const { credential } = response;
+    console.log("Google credential:", credential);
 
     if (!credential) {
       console.error("No Google credential received");
@@ -182,16 +183,17 @@ const Login = () => {
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Google Login Button */}
-            <GoogleLogin
-              clientId={Client_ID}
-              buttonText="Login with Google"
-              onSuccess={handleGoogleLogin}
-              onFailure={handleGoogleFailure}
-              cookiePolicy="single_host_origin"
-              size="large"
-              shape="square"
-            />
-
+            <div className="flex justify-center">
+              <GoogleLogin
+                clientId={Client_ID}
+                buttonText="Login with Google"
+                onSuccess={handleGoogleLogin}
+                onFailure={handleGoogleFailure}
+                cookiePolicy="single_host_origin"
+                size="large"
+                shape="square"
+              />
+            </div>
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-glass-border"></div>
