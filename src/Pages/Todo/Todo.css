@@ -29,12 +29,12 @@
   border: 2px solid gray;
   height: 90vh;
 }
-
 .task-cards-container {
   display: flex;
   flex-wrap: wrap;
   margin-top: 20px;
   gap: 2vw;
+  align-items: stretch; /* makes all cards in a row equal height */
 }
 
 .add-task-card {
@@ -43,11 +43,12 @@
   color: rgb(255, 255, 255);
   text-align: center;
   border: dotted;
-  width: 26%;
+  width: 25%;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 20%;
+  min-height: 25vh; /* fallback height when no tasks exist */
 }
 
 .add-task-card:hover {

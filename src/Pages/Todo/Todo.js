@@ -66,27 +66,24 @@ function TodoList() {
       date: date ? new Date(date).toISOString() : null, // Convert date to ISO string
       status: isCompleted ? "Completed" : "Incomplete",
       isImportant,
-      completedOn: isCompleted
-        ? new Date().toISOString()
-        : new Date().toISOString(), // Take today's date regardless
+      completedOn: isCompleted ? new Date().toISOString() : null, // only set if completed
       userId, // Fetched from context
     };
 
     if (isSubmitting) {
-      console.log("Submission in progress, ignoring further submissions."); // Log if already submitting
       return;
     }
 
     setSubmitting(true); // Set submitting to true
     setModalOpen(false);
+    if (!title || !description) {
+      toast.error("Title and Description are required!");
+      return;
+    }
 
     try {
       setLoading(true);
-      toast.loading("Creating task..."); // Show loading toast
-
       const response = await api.post("/todos", newTask);
-      console.log("Task created successfully:", response.data.todo); // Log success response
-
       setTasks([...tasks, response.data.todo]); // Update the tasks list
 
       setTitle("");
@@ -249,7 +246,7 @@ function TodoList() {
           >
             <h2 style={{ color: isDarkMode ? "black" : "white" }}>Title</h2>
             <TextField
-              label="Title"
+              placeholder="Enter title"
               variant="outlined"
               fullWidth
               value={title}
@@ -277,7 +274,7 @@ function TodoList() {
               Description
             </h2>
             <TextField
-              label="Description"
+              placeholder="Enter description"
               variant="outlined"
               fullWidth
               value={description}
