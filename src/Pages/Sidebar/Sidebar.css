@@ -2,7 +2,11 @@
 .sidebar {
   width: 19%;
   /* background-color: #1f1e1e; */
-  background-image: radial-gradient(circle 1300px at 58% 90%, #243447, #0f0f14 70%);
+  background-image: radial-gradient(
+    circle 1300px at 58% 90%,
+    #243447,
+    #0f0f14 70%
+  );
   color: white;
   padding: 20px;
   display: flex;
@@ -16,14 +20,12 @@
 }
 
 .sidebar.dark {
-  /* background-color: whitesmoke; */
-  background-image: radial-gradient(circle 1300px at 80% 100%, #e0f7fa, #f5f5f5 70%);
+  background: linear-gradient(135deg, #ffffff, #f0f4f8);
 
   /* Dark background */
   color: #fff;
   /* Light text color */
   border: 3px solid black;
-
 }
 
 /* Profile section */
@@ -32,15 +34,12 @@
   margin-bottom: 20px;
 }
 
-
-
 .profile-img {
   width: 80px;
   height: 80px;
   border-radius: 50%;
   margin-bottom: 10px;
 }
-
 
 .nav {
   position: relative;
@@ -54,7 +53,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1vh
+  gap: 1vh;
 }
 
 .nav li.active {
@@ -66,7 +65,7 @@
 }
 
 .nav li.active::before {
-  content: '';
+  content: "";
   position: absolute;
   height: 100%;
   width: 5px;
@@ -74,7 +73,6 @@
   left: 0;
   top: 0;
   border-radius: 3px;
-
 }
 
 .nav li {
@@ -88,9 +86,8 @@
   overflow: hidden;
 }
 
-
 .nav li::before {
-  content: '';
+  content: "";
   position: absolute;
   height: 100%;
   width: 100%;
@@ -120,7 +117,6 @@
   left: 0;
 }
 
-
 .sign-out {
   margin-top: auto;
   padding: 10px 20px;
@@ -139,7 +135,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
 .sign-out-container:hover {
@@ -150,23 +145,13 @@
   font-size: 1.5rem;
 }
 
-
-
-
-
-
-
 .dark-mode-icon {
   color: black;
 }
 
-
 .dark-mode-icon:hover {
   color: white;
 }
-
-
-
 
 /* Dark mode styles */
 .sidebar.dark .profile-name {
@@ -175,7 +160,6 @@
 
 .sidebar.dark {
   border: 2px solid black;
-
 }
 
 .sidebar.dark .nav li {
@@ -193,7 +177,6 @@
 .sidebar.dark .nav li.active::before {
   background-color: #06f306;
 }
-
 
 .sidebar.dark .dark-mode-icon:hover {
   color: aquamarine;
@@ -215,7 +198,6 @@
   color: #f83d3d;
 }
 
-
 .sidebar-toggle-icon {
   display: none;
 }
@@ -224,35 +206,24 @@
   display: none;
 }
 
-
-
-
-
 .projects-dropdown {
   margin-top: -10%;
   margin-left: -3%;
 }
 
-
-
-
-
-
-
 /* Modal Styling */
-.modal-container {}
-
-
-
-
-
-
+.modal-container {
+}
 
 @media (max-width: 768px) {
   .sidebar {
     width: 43%;
     /* background-color: #1f1e1e; */
-    background-image: radial-gradient(circle 1300px at 58% 90%, #243447, #0f0f14 70%);
+    background-image: radial-gradient(
+      circle 1300px at 58% 90%,
+      #243447,
+      #0f0f14 70%
+    );
     color: white;
     padding: 20px;
     display: flex;
@@ -289,8 +260,6 @@
     font-size: 16px;
   }
 
-
-
   .sidebar .nav li i {
     font-size: 20px;
     /* Show icons only */
@@ -305,5 +274,4 @@
   .profile {
     text-align: center;
   }
-
 }

@@ -115,7 +115,7 @@ const Chat = () => {
       className="chat-system"
       style={{
         position: "absolute",
-        bottom: window.innerWidth < 780 ? "1%" : "2%",
+        bottom: window.innerWidth < 780 ? "1%" : "7%",
         right: window.innerWidth < 780 ? "1%" : "5.2%",
         width: window.innerWidth < 780 ? "90%" : "25%",
         height: isChatOpen ? "400px" : "60px",

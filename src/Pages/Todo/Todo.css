@@ -182,21 +182,12 @@
 /* Dark mode styles */
 
 .app.dark {
-  /* background-color: rgb(216, 213, 213); */
-  background-image: radial-gradient(
-    circle 1300px at 80% 100%,
-    #e0f7fa,
-    #f5f5f5 70%
-  );
+  background: linear-gradient(135deg, #ffffff, #f0f4f8);
 }
 
 .app.dark .tasks-container {
   /* background-color: whitesmoke;  */
-  background-image: radial-gradient(
-    circle 1300px at 80% 100%,
-    #e0f7fa,
-    #f5f5f5 70%
-  );
+  background: linear-gradient(135deg, #ffffff, #f0f4f8);
   color: black;
   border: 2px solid black;
 }

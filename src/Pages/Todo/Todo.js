@@ -188,7 +188,7 @@ function TodoList() {
         <div className="task-cards-container">
           {filteredTasks.map((task, index) => (
             <TaskCard
-              key={index}
+              key={task.id}
               task={task}
               onUpdateStatus={updateTaskStatus}
               onDelete={onDeleteTask}
